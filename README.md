@@ -12,7 +12,7 @@ sandra_cli [command] [flags]
 
 ##### OPCIONES
 
-El comando config permite generar el archivo de token para crear la instalacion de Sandra Server. podra acceder a nuestro sitio https://code-epic.com/register y loguearte con tu cuenta de Gmail o crear una luego acceder a la autenticacion y copiar el codigo SHA256 que te genera la plataforma.
+El comando config permite generar el archivo de token para crear la instalacion de Sandra Server. podra acceder a nuestro sitio https://code-epic.com/register y loguearte con tu cuenta de Gmail, luego acceder a la autenticacion y copiar el codigo SHA256 o sha512 que te asignara la plataforma aleatoriamente.
 
 config
 
