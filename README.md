@@ -16,9 +16,10 @@ El comando config permite generar el archivo de token para crear la instalacion 
 
 config
 
-	--id formato de encriptacion sha256 entrar en la plataforma www.code-epic.com/products
-	--file key | crt la llave para descargar e iniciar Sandra Server
-	--add token que te genera la WEB de products
+```
+--file key | crt la llave para descargar e iniciar Sandra Server
+--add token que te genera la WEB de register
+```
 
 ```sh
 sandra_cli config --id sha256 --file crt --add {token.code-epic.com}
