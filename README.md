@@ -16,7 +16,8 @@ El comando config permite generar el archivo de token para crear la instalacion 
 
 config
 
-```
+``
+--id sha256 | sha512 formato de encriptacion de archivos
 --file key | crt la llave para descargar e iniciar Sandra Server
 --add token que te genera la WEB de register
 ```
