@@ -25,10 +25,7 @@ type Descargar struct{}
 
 type Color string
 
-var (
-	Verbose bool = false
-	Limit   int  = 64
-)
+var ()
 
 // Declarando parametros de la instalacion
 const (

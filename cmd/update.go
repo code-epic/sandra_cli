@@ -24,7 +24,7 @@ API internas de Sandra Server`,
 			if opt != "" {
 				ValidarParametros(opt)
 			} else {
-				PrintColor(CRed, Help())
+				PrintColor(CRed, Help("update"))
 			}
 			Verbose, _ = cmd.Flags().GetBool("verbose")
 		},

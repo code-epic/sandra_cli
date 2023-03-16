@@ -1,40 +1,46 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
 // newProjectCmd represents the newProject command
-var newProjectCmd = &cobra.Command{
-	Use:   "newProject",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+var (
+	Type          string
+	Name          string
+	Language      string
+	Author        string
+	newProjectCmd = &cobra.Command{
+		Use:   "newProject [create|update] ",
+		Short: "Crear un nuevo proyecto web, movil, desktop",
+		Long: `Desarrolla aplicaciones en el contexto de un espacio de trabajo de Angular y Dart. 
+Un espacio de trabajo contiene los archivos de uno o más proyectos son el conjunto de 
+archivos que componen una aplicación o una biblioteca.`,
+		Run: func(cmd *cobra.Command, args []string) {
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("newProject called")
-	},
-}
+			if len(args) > 0 {
+				CrearProyecto()
+			} else {
+				PrintColor(CRed, Help("newProject"))
+			}
+		},
+		TraverseChildren: true,
+	}
+)
 
 func init() {
 	rootCmd.AddCommand(newProjectCmd)
 
-	// Here you will define your flags and configuration settings.
+	newProjectCmd.PersistentFlags().StringVarP(&Type, "type", "t", "web", `Tipo: web, movil, desktop`)
+	newProjectCmd.PersistentFlags().StringVarP(&Name, "name", "n", "sandra_dev", `Nombre descriptivo`)
+	newProjectCmd.PersistentFlags().StringVarP(&Author, "author", "a", "code.epic", `Autor del desarrollo`)
+	newProjectCmd.PersistentFlags().StringVarP(&Language, "language", "l", "angular", `Lenguaje: angular, flutter `)
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// newProjectCmd.PersistentFlags().String("foo", "", "A help for foo")
+}
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// newProjectCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func CrearProyecto() {
+
 }

@@ -31,7 +31,7 @@ e instala el servidor por primera vez`,
 			if opt != "" {
 				ValidarArgumentos(opt)
 			} else {
-				PrintColor(CRed, Help())
+				PrintColor(CRed, Help("install"))
 			}
 			Verbose, _ = cmd.Flags().GetBool("verbose")
 		},
@@ -40,8 +40,8 @@ e instala el servidor por primera vez`,
 	Dw Descargar
 )
 
-func Help() string {
-	return `Intente escribir sandra_cli install -h ver en pantalla las opciones.`
+func Help(cmd string) string {
+	return `Intente escribir sandra_cli ` + cmd + ` -h ver en pantalla las opciones.`
 }
 
 func init() {
