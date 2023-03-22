@@ -52,6 +52,8 @@ func ValidarParametros(valor string) {
 		UpdateService()
 	case "tools":
 		UpdateTools()
+	case "consola":
+		UpdateConsola()
 	case "cli":
 		UpdateCli()
 	case "data-base":
@@ -86,7 +88,7 @@ echo -e "    - Actualizando sandrad en $BASE_URL"
 echo -e "    - Eliminando temporales"
 rm -rf ` + fileName + `
 rm -rf sandra
-echo -e "[+] Iniciando el servicio sadrad"
+echo -e "[+] Iniciando el servicio sandrad"
 systemctl start sandrad
 `
 	ExecCmd(sCmd)
@@ -144,4 +146,26 @@ echo -e "    - Eliminando temporales"
 rm -rf sandra_cli
 `
 	ExecCmd(sCmd)
+}
+
+func UpdateConsola() {
+	fileName := Update.App(DW_SANDRA_CONSOLA)
+	sCmd := `clear`
+	ExecCmd(sCmd)
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("     Actualizando Interfaz grafica (Consola)             ")
+	fmt.Println("     " + SANDRA_WWW + "/consola")
+	fmt.Println("---------------------------------------------------------")
+	sCmd = `#!/bin/bash
+BASE_URL="` + SANDRA_WWW + `/consola";
+echo -e "[+] Descomprimiendo archivo"
+unzip ` + fileName + ` 1>/dev/null && echo -e "    - El paquete ha sido descomprimido"
+rm -rf ` + fileName + `
+cp -r sandra/public_web/consola/* $BASE_URL 2>/dev/null;
+rm -rf sandra
+echo -e "[+] Eliminando archivos temporales"
+echo -e "[+] Version $(sed -n '2,1 p' $BASE_URL/assets/version.sdr) Instalada"
+`
+	ExecCmd(sCmd)
+
 }

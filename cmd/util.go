@@ -29,31 +29,32 @@ var ()
 
 // Declarando parametros de la instalacion
 const (
-	TB                      = 1000000000000
-	GB                      = 1000000000
-	MB                      = 1000000
-	KB                      = 1000
-	layout           string = "2006-01-02"
-	CBlack           Color  = "\u001b[30m"
-	CRed                    = "\u001b[31m"
-	CGreen                  = "\u001b[2m"
-	CYellow                 = "\u001b[33m"
-	CBlue                   = "\u001b[34m"
-	CReset                  = "\u001b[0m"
-	BASE_PATH        string = "/usr/local"
-	SERVICE          string = "/etc/systemd/system"
-	LOGS             string = "/var/log/sandra"
-	DIR              string = "sandra"
-	CMD              string = "cmd"
-	DEAMON           string = "sandrad"
-	BASE_REPO        string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
-	DW_MKCERT        string = "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
-	DW_SANDRA        string = BASE_REPO + "pkg/linux/x86_64/sandra.zip"
-	DW_SANDRA_DAEMON string = BASE_REPO + "pkg/linux/x86_64/sandra_daemon.zip"
-	DW_SANDRA_TOOLS  string = BASE_REPO + "pkg/linux/x86_64/sandra_tools.zip"
-	DW_SANDRA_CLI    string = BASE_REPO + "pkg/linux/x86_64/sandra_cli.zip"
-	DW_MONGODB       string = BASE_REPO + "db/mongo.sse.x86_64.zip"
-	DW_MYSQLDB       string = BASE_REPO + "db/security.sse.x86_64.zip"
+	TB                       = 1000000000000
+	GB                       = 1000000000
+	MB                       = 1000000
+	KB                       = 1000
+	layout            string = "2006-01-02"
+	CBlack            Color  = "\u001b[30m"
+	CRed                     = "\u001b[31m"
+	CGreen                   = "\u001b[2m"
+	CYellow                  = "\u001b[33m"
+	CBlue                    = "\u001b[34m"
+	CReset                   = "\u001b[0m"
+	BASE_PATH         string = "/usr/local"
+	SERVICE           string = "/etc/systemd/system"
+	LOGS              string = "/var/log/sandra"
+	DIR               string = "sandra"
+	CMD               string = "cmd"
+	DEAMON            string = "sandrad"
+	BASE_REPO         string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
+	DW_MKCERT         string = "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+	DW_SANDRA         string = BASE_REPO + "pkg/linux/x86_64/sandra.zip"
+	DW_SANDRA_DAEMON  string = BASE_REPO + "pkg/linux/x86_64/sandra_daemon.zip"
+	DW_SANDRA_TOOLS   string = BASE_REPO + "pkg/linux/x86_64/sandra_tools.zip"
+	DW_SANDRA_CLI     string = BASE_REPO + "pkg/linux/x86_64/sandra_cli.zip"
+	DW_SANDRA_CONSOLA string = BASE_REPO + "pkg/linux/x86_64/sandra_consola.zip"
+	DW_MONGODB        string = BASE_REPO + "db/mongo.sse.x86_64.zip"
+	DW_MYSQLDB        string = BASE_REPO + "db/security.sse.x86_64.zip"
 )
 
 func PrintColor(color Color, message string) {

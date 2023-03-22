@@ -17,6 +17,7 @@ var (
 	APPS               = []string{"mysql", "mongosh", "openssl", "curl", "gcc", "git"}
 	SANDRA_HOME string = BASE_PATH + "/" + DIR
 	SANDRA_BIN  string = SANDRA_HOME + "/bin"
+	SANDRA_WWW  string = SANDRA_HOME + "/public_web"
 	Spinner     Cargador
 	installCmd  = &cobra.Command{
 		Use:   "install ",
