@@ -14,6 +14,11 @@ import (
 var (
 	Seleccion   string
 	Opciones    string
+	Host        string
+	Port        string
+	User        string
+	Nombre      string
+	Password    string
 	APPS               = []string{"mysql", "mongosh", "openssl", "curl", "gcc", "git"}
 	SANDRA_HOME string = BASE_PATH + "/" + DIR
 	SANDRA_BIN  string = SANDRA_HOME + "/bin"
@@ -42,19 +47,27 @@ e instala el servidor por primera vez`,
 )
 
 func Help(cmd string) string {
-	return `Intente escribir sandra_cli ` + cmd + ` -h ver en pantalla las opciones.`
+	return `Intente escribir sandra ` + cmd + ` -h ver en pantalla las opciones.`
 }
 
 func init() {
 	rootCmd.AddCommand(installCmd)
 
 	installCmd.Flags().BoolP("verbose", "v", false, "Mostrar detalles")
+
+	installCmd.PersistentFlags().StringVarP(&Host, "host", "H", "", `Host del servidor`)
+	installCmd.PersistentFlags().StringVarP(&Port, "port", "P", "", `Puerto`)
+	installCmd.PersistentFlags().StringVarP(&User, "user", "U", "", `Usuario Base de Datos`)
+	installCmd.PersistentFlags().StringVarP(&Nombre, "name", "N", "", `Nombdre de la Base de Datos`)
+	installCmd.PersistentFlags().StringVarP(&Password, "passwd", "W", "", `Clave Base de Datos`)
+
 	installCmd.Flags().BoolP("config", "c", false, "Configurar archivo de reglas")
 	installCmd.PersistentFlags().StringVarP(&Opciones, "option", "o", "", `Escribir la opcion que se desea para Sandra Server ejemplo:
 
 service: Incluye consola, demonio y base de datos internas
 tools: Herramientas para el escaneo y analisis
 data-base: Permite instalar base de datos de terceros
+data-base-wkf: Permite instalar base de datos WorkFlow
 mkcert: Crear certificados ssl https://mkcert.org
 `)
 
@@ -65,7 +78,8 @@ func ValidarArgumentos(valor string) {
 	case "service":
 		VerificarPaquetes()
 	case "tools":
-
+	case "data-base-wkf":
+		CrearMysqlDBWKF(Host, User, Password, Nombre)
 	case "data-base":
 		InstalarBaseDatos()
 	case "mkcert":
@@ -121,7 +135,7 @@ RUTA=$HOME/.bashrc;
 
 mkdir -p ` + SANDRA_HOME + `;
 
-# Creando la base para los paquete /urs/local/bin/sandra
+# Creando la base para los paquete /usr/local/bin/sandra
 echo -e "[+] Creando espacio de trabajo en $BASE_URL"
 unzip ` + fileName + ` 1>/dev/null && echo -e "    - El paquete ha sido descomprimido"
 rm -rf ` + fileName + `
@@ -164,7 +178,6 @@ func InstalarBaseDatos() {
 }
 
 // CrearMysqlDump Crear Base de datos code-epic
-// cargar dump de Workflow
 func CrearMysqlDB(ip string, user string, pass string, my_dbname string) {
 
 	if ip != "" {
@@ -175,16 +188,49 @@ func CrearMysqlDB(ip string, user string, pass string, my_dbname string) {
 echo -e "[+] Creando Base de datos "
 unzip ` + my_dbname + ` 1>/dev/null && echo -e "    - El paquete ` + my_dbname + ` se ha descomprimido ";
 echo -e "    - Archivo descomprimido: ";
-mysql -u` + user + ` -p` + pass + ip + ` -e "CREATE DATABASE code_epic;";
+mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + DB_NAME + ` ;";
 echo -e "    - Base de datos (code_epic) creada ";`
 	ExecCmd(sCmd)
 
-	sCmd = `mysql -u` + user + ` -p` + pass + ip + ` code_epic < mysqldb/security.sse.x86_64.sql 2>/dev/null ;
+	sCmd = `mysql -u` + user + ` -p` + pass + ` ` + ip + ` ` + DB_NAME + ` < mysqldb/code_epic.sql 2>/dev/null ;
 echo -e "    - Estructura de seguridad creada";`
 	ExecCmd(sCmd)
 
-	sCmd = `mysql -u` + user + ` -p` + pass + ip + ` code_epic < mysqldb/workflow.sse.x86_64.sql 2>/dev/null ;
+	sCmd = `
+echo -e "[+] Creando Base de datos Workflow"
+mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + DB_WKF + `;";
+echo -e "    - Base de datos (` + DB_WKF + `) creada ";`
+	ExecCmd(sCmd)
+
+	sCmd = `mysql -u` + user + ` -p` + pass + ` ` + ip + ` ` + DB_WKF + ` < mysqldb/wkf.sql 2>/dev/null;
 echo -e "    - Estructura de workflow creada";`
+	ExecCmd(sCmd)
+
+}
+
+// CrearMysqlDump Crear Base de datos code-epic
+// cargar dump de Workflow
+func CrearMysqlDBWKF(ip string, user string, pass string, my_dbname string) {
+
+	fmt.Println("[+] Esquema de datos Mysql... ")
+	mysql := Dw.App(DW_MYSQLDB)
+	fmt.Println("    ---------------------------------------------------------")
+	fmt.Println("     Configurando base de datos de mysql para            ")
+	fmt.Println("     " + mysql)
+	fmt.Println("    ---------------------------------------------------------")
+	if ip != "" {
+		ip = "-h " + ip
+	}
+	sCmd := `
+echo -e "[+] Creando Base de datos "
+unzip ` + mysql + ` 1>/dev/null && echo -e "    - El paquete ` + mysql + ` se ha descomprimido ";
+echo -e "    - Archivo descomprimido: ";
+mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + my_dbname + `;";
+echo -e "    - Base de datos (` + my_dbname + `) creada ";`
+	ExecCmd(sCmd)
+
+	sCmd = `mysql -u` + user + ` -p` + pass + ` ` + ip + ` ` + my_dbname + ` < mysqldb/wkf.sql 2>/dev/null ;
+echo -e "    - Estructura de seguridad creada";`
 	ExecCmd(sCmd)
 
 }
@@ -195,8 +241,8 @@ func CrearMongoDB(ip string, user string, pass string, my_dbname string) {
 echo -e "[+] Creando Base de datos "
 unzip ` + my_dbname + ` 1>/dev/null && echo -e "    - El paquete ` + my_dbname + ` se ha descomprimido ";
 echo -e "    - Archivo descomprimido: ";
-mongorestore --db code-epic dump/code-epic 2>/dev/null;
-echo -e "    - Base de datos (code-epic) creada ";`
+mongorestore --db ` + DB_MONGO + ` dump/code-epic 2>/dev/null;
+echo -e "    - Base de datos (` + DB_MONGO + `) creada ";`
 	ExecCmd(sCmd)
 }
 
@@ -226,7 +272,7 @@ cp sandra_cli $BASE_URL/bin
 echo -e "[+] Copiando archivo del servicio \n"
 cp $BASE_URL/cmd/sandrad.service ` + SERVICE + `/sandrad.service
 
-ln -s $BASE_URL/bin/sandra_cli /usr/bin/sandra_cli
+ln -s $BASE_URL/bin/sandra_cli /usr/bin/sandra
 ln -s $BASE_URL/bin/sandra_dwn /usr/bin/sandra_dwn
 ln -s $BASE_URL/bin/sandra_scanf /usr/bin/sandra_scanf
 

@@ -44,6 +44,9 @@ const (
 	SERVICE           string = "/etc/systemd/system"
 	LOGS              string = "/var/log/sandra"
 	DIR               string = "sandra"
+	DB_NAME           string = "code_epic_new"
+	DB_WKF            string = "wkf_core_new"
+	DB_MONGO          string = "code-epic-new"
 	CMD               string = "cmd"
 	DEAMON            string = "sandrad"
 	BASE_REPO         string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
@@ -55,6 +58,7 @@ const (
 	DW_SANDRA_CONSOLA string = BASE_REPO + "pkg/linux/x86_64/sandra_consola.zip"
 	DW_MONGODB        string = BASE_REPO + "db/mongo.sse.x86_64.zip"
 	DW_MYSQLDB        string = BASE_REPO + "db/security.sse.x86_64.zip"
+	DW_PLANTILLA      string = BASE_REPO + "src/plantilla/angular_web.zip"
 )
 
 func PrintColor(color Color, message string) {

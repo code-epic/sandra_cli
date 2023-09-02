@@ -4,6 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -41,6 +43,18 @@ func init() {
 
 }
 
+// CrearProyecto Crear Base de datos code-epic
+// cargar dump de Workflow
 func CrearProyecto() {
+
+	fmt.Println("[+] Creando plantilla WEB para ... " + Name)
+	plantilla := Dw.App(DW_PLANTILLA)
+
+	sCmd := `
+echo -e "[+] Creando plantilla para el proyecto "
+unzip ` + plantilla + ` 1>/dev/null && echo -e "    - El paquete ` + plantilla + ` se ha descomprimido ";
+mv sandra_dev ` + Name + `; 
+echo -e "    - Archivo descomprimido:";`
+	ExecCmd(sCmd)
 
 }
