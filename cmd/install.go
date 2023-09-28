@@ -188,8 +188,9 @@ func CrearMysqlDB(ip string, user string, pass string, my_dbname string) {
 echo -e "[+] Creando Base de datos "
 unzip ` + my_dbname + ` 1>/dev/null && echo -e "    - El paquete ` + my_dbname + ` se ha descomprimido ";
 echo -e "    - Archivo descomprimido: ";
-mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + DB_NAME + ` ;";
-echo -e "    - Base de datos (code_epic) creada ";`
+mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` +
+		DB_NAME + ` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;";
+echo -e "    - Base de datos (` + DB_NAME + `) creada ";`
 	ExecCmd(sCmd)
 
 	sCmd = `mysql -u` + user + ` -p` + pass + ` ` + ip + ` ` + DB_NAME + ` < mysqldb/code_epic.sql 2>/dev/null ;
@@ -198,7 +199,8 @@ echo -e "    - Estructura de seguridad creada";`
 
 	sCmd = `
 echo -e "[+] Creando Base de datos Workflow"
-mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + DB_WKF + `;";
+mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` +
+		DB_WKF + ` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;";
 echo -e "    - Base de datos (` + DB_WKF + `) creada ";`
 	ExecCmd(sCmd)
 
@@ -225,7 +227,7 @@ func CrearMysqlDBWKF(ip string, user string, pass string, my_dbname string) {
 echo -e "[+] Creando Base de datos "
 unzip ` + mysql + ` 1>/dev/null && echo -e "    - El paquete ` + mysql + ` se ha descomprimido ";
 echo -e "    - Archivo descomprimido: ";
-mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + my_dbname + `;";
+mysql -u` + user + ` -p` + pass + ` ` + ip + ` -e "CREATE DATABASE ` + my_dbname + ` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;";
 echo -e "    - Base de datos (` + my_dbname + `) creada ";`
 	ExecCmd(sCmd)
 
