@@ -29,27 +29,28 @@ var ()
 
 // Declarando parametros de la instalacion
 const (
-	TB                       = 1000000000000
-	GB                       = 1000000000
-	MB                       = 1000000
-	KB                       = 1000
-	layout            string = "2006-01-02"
-	CBlack            Color  = "\u001b[30m"
-	CRed                     = "\u001b[31m"
-	CGreen                   = "\u001b[2m"
-	CYellow                  = "\u001b[33m"
-	CBlue                    = "\u001b[34m"
-	CReset                   = "\u001b[0m"
-	BASE_PATH         string = "/usr/local"
-	SERVICE           string = "/etc/systemd/system"
-	LOGS              string = "/var/log/sandra"
-	DIR               string = "sandra"
-	DB_NAME           string = "code_epic"
-	DB_WKF            string = "wkf_core"
-	DB_MONGO          string = "code-epic"
-	CMD               string = "cmd"
-	DEAMON            string = "sandrad"
-	BASE_REPO         string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
+	TB               = 1000000000000
+	GB               = 1000000000
+	MB               = 1000000
+	KB               = 1000
+	layout    string = "2006-01-02"
+	CBlack    Color  = "\u001b[30m"
+	CRed             = "\u001b[31m"
+	CGreen           = "\u001b[2m"
+	CYellow          = "\u001b[33m"
+	CBlue            = "\u001b[34m"
+	CReset           = "\u001b[0m"
+	BASE_PATH string = "/usr/local"
+	SERVICE   string = "/etc/systemd/system"
+	LOGS      string = "/var/log/sandra"
+	DIR       string = "sandra"
+	DB_NAME   string = "code_epic"
+	DB_WKF    string = "wkf_core"
+	DB_MONGO  string = "code-epic"
+	CMD       string = "cmd"
+	DEAMON    string = "sandrad"
+	//BASE_REPO         string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
+	BASE_REPO         string = "https://code-epic.com/src/sandra-enterprise/"
 	DW_MKCERT         string = "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
 	DW_SANDRA         string = BASE_REPO + "pkg/linux/x86_64/sandra.zip"
 	DW_SANDRA_DAEMON  string = BASE_REPO + "pkg/linux/x86_64/sandra_daemon.zip"
@@ -76,21 +77,21 @@ func (D *Descargar) App(url string) (fileName string) {
 	// TODO: check file existence first with io.IsExist
 	output, err := os.Create(fileName)
 	if err != nil {
-		fmt.Println("Error while creating", fileName, "-", err)
+		fmt.Println("Error mientras se crear el archivo", fileName, "-", err)
 		return
 	}
 	defer output.Close()
 
 	response, err := http.Get(url)
 	if err != nil {
-		fmt.Println("Error while downloading", url, "-", err)
+		fmt.Println("Error en la descarga", url, "-", err)
 		return
 	}
 	defer response.Body.Close()
 
 	n, err := io.Copy(output, response.Body)
 	if err != nil {
-		fmt.Println("Error while downloading", url, "-", err)
+		fmt.Println("Error en la descarga", url, "-", err)
 		return
 	}
 	peso := PesoHumano(int(n), 2)

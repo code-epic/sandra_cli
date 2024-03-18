@@ -143,7 +143,7 @@ mv sandra/* $BASE_URL 2>/dev/null;
 echo -e "    - Moviendo al area de trabajo"`
 
 	ExecCmd(sCmd)
-	InstalarBaseDatos()
+	//InstalarBaseDatos()
 
 	CrearVariables()
 	PrintColor(CGreen, "[*] Proceso finalizado con exito")
@@ -292,8 +292,8 @@ echo "export PATH=$PATH:$BASE_URL:$BASE_URL/bin" >> $RUTA
 source $HOME/.bashrc;
 systemctl daemon-reload
 systemctl reset-failed
-systemctl enable sandrad
-systemctl start sandrad`
+systemctl enable sandrad`
+	//systemctl start sandrad
 	ExecCmd(sCmd)
 }
 

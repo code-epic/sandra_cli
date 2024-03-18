@@ -13,7 +13,8 @@ COMPILACION="$REPO/cmd.Compilacion=$1"
 
 
 
-GOARCH=amd64 GOOS=linux go build -ldflags "-s -w -X '$VERSION' -X '$BUILD_DATE' -X '$COMPILACION'" -o sandra_cli main.go
 
+#GOARCH=amd64 GOOS=linux go build -ldflags "-s -w -X '$VERSION' -X '$BUILD_DATE' -X '$COMPILACION'" -o sandra_cli main.go
+GOARCH=amd64 GOOS=darwin go build -ldflags "-s -w -X '$VERSION' -X '$BUILD_DATE' -X '$COMPILACION'" -o sandra_cli main.go
 
 echo -e "    - Compilacion terminada\n"
