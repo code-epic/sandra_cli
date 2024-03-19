@@ -29,30 +29,30 @@ var ()
 
 // Declarando parametros de la instalacion
 const (
-	TB               = 1000000000000
-	GB               = 1000000000
-	MB               = 1000000
-	KB               = 1000
-	layout    string = "2006-01-02"
-	CBlack    Color  = "\u001b[30m"
-	CRed             = "\u001b[31m"
-	CGreen           = "\u001b[2m"
-	CYellow          = "\u001b[33m"
-	CBlue            = "\u001b[34m"
-	CReset           = "\u001b[0m"
-	BASE_PATH string = "/usr/local"
-	SERVICE   string = "/etc/systemd/system"
-	LOGS      string = "/var/log/sandra"
-	DIR       string = "sandra"
-	DB_NAME   string = "code_epic"
-	DB_WKF    string = "wkf_core"
-	DB_MONGO  string = "code-epic"
-	CMD       string = "cmd"
-	DEAMON    string = "sandrad"
-	//BASE_REPO         string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
+	TB                       = 1000000000000
+	GB                       = 1000000000
+	MB                       = 1000000
+	KB                       = 1000
+	layout            string = "2006-01-02"
+	CBlack            Color  = "\u001b[30m"
+	CRed                     = "\u001b[31m"
+	CGreen                   = "\u001b[2m"
+	CYellow                  = "\u001b[33m"
+	CBlue                    = "\u001b[34m"
+	CReset                   = "\u001b[0m"
+	BASE_PATH         string = "/usr/local"
+	SERVICE           string = "/etc/systemd/system"
+	LOGS              string = "/var/log/sandra"
+	DIR               string = "sandra"
+	DB_NAME           string = "code_epic"
+	DB_WKF            string = "wkf_core"
+	DB_MONGO          string = "code-epic"
+	CMD               string = "cmd"
+	DEAMON            string = "sandrad"
+	BASE_REPO_GIT     string = "https://github.com/code-epic/sandra-enterprise/raw/main/"
 	BASE_REPO         string = "https://code-epic.com/src/sandra-enterprise/"
 	DW_MKCERT         string = "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
-	DW_SANDRA         string = BASE_REPO + "pkg/linux/x86_64/sandra.zip"
+	DW_SANDRA         string = "pkg/linux/x86_64/sandra.zip"
 	DW_SANDRA_DAEMON  string = BASE_REPO + "pkg/linux/x86_64/sandra_daemon.zip"
 	DW_SANDRA_TOOLS   string = BASE_REPO + "pkg/linux/x86_64/sandra_tools.zip"
 	DW_SANDRA_CLI     string = BASE_REPO + "pkg/linux/x86_64/sandra_cli.zip"

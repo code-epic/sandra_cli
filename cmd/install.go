@@ -15,6 +15,7 @@ var (
 	Seleccion   string
 	Opciones    string
 	Host        string
+	Origin      string
 	Port        string
 	User        string
 	Nombre      string
@@ -55,6 +56,7 @@ func init() {
 
 	installCmd.Flags().BoolP("verbose", "v", false, "Mostrar detalles")
 
+	installCmd.PersistentFlags().StringVarP(&Origin, "origin", "O", "", `Origen del servidor`)
 	installCmd.PersistentFlags().StringVarP(&Host, "host", "H", "", `Host del servidor`)
 	installCmd.PersistentFlags().StringVarP(&Port, "port", "P", "", `Puerto`)
 	installCmd.PersistentFlags().StringVarP(&User, "user", "U", "", `Usuario Base de Datos`)
@@ -121,8 +123,13 @@ func VerificarPaquetes() {
 
 // Instalar Servicios Generales
 func InstalarServicio() {
-
-	fileName := Dw.App(DW_SANDRA)
+	var dwl_origin string
+	if Origin == "" {
+		dwl_origin = BASE_REPO_GIT + DW_SANDRA
+	} else {
+		dwl_origin = BASE_REPO + DW_SANDRA
+	}
+	fileName := Dw.App(dwl_origin)
 	fmt.Println("---------------------------------------------------------")
 	fmt.Println("   Configurando la plataforma Sandra Server              ")
 	fmt.Println("   " + SANDRA_HOME)
